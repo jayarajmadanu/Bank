@@ -18,3 +18,17 @@ stages:
       - schema/customerChurnSchema.yaml:
     outs:
       - artifacts/data_validation/status.txt
+  data_transformation:
+    cmd: py -m src.customerChurn.pipeline.stage_03_data_transformation_pipeline
+    deps:
+      - src/customerChurn/pipeline/stage_03_data_transformation_pipeline.py
+      - src/customerChurn/components/data_transformation.py
+    params:
+      - config/customerChurnConfig.yaml:
+        - data_transformation
+      - schema/customerChurnSchema.yaml:
+        - targer_colunm
+    outs:
+      - artifacts/data_transformation/preprocessor.pkl
+      - artifacts/data_transformation/test.csv
+      - artifacts/data_transformation/train.csv

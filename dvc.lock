@@ -36,7 +36,7 @@ stages:
           validation_status_file_path: artifacts/data_validation/status.txt
       schema/customerChurnSchema.yaml:
         columns:
-          id: int6
+          id: int64
           CustomerId: int64
           Surname: object
           CreditScore: int64
@@ -56,3 +56,40 @@ stages:
       hash: md5
       md5: f827cf462f62848df37c5e1e94a4da74
       size: 4
+  data_transformation:
+    cmd: py -m src.customerChurn.pipeline.stage_03_data_transformation_pipeline
+    deps:
+    - path: src/customerChurn/components/data_transformation.py
+      hash: md5
+      md5: 3404e315b6a9d04235c92e6f9672b708
+      size: 3108
+    - path: src/customerChurn/pipeline/stage_03_data_transformation_pipeline.py
+      hash: md5
+      md5: ba6a4f83f6653912f9f139b88659ce2c
+      size: 881
+    params:
+      config/customerChurnConfig.yaml:
+        data_transformation:
+          root_dir: artifacts/data_transformation
+          dataset_file_path: artifacts/data_ingestion/dataset.csv
+          processed_dataset_file_path: artifacts/data_transformation/processed_dataset.csv
+          preprocessor_obj_path: artifacts/data_transformation/preprocessor.pkl
+          test_size: 0.3
+          train_dataset_file_path: artifacts/data_transformation/train.csv
+          test_dataset_file_path: artifacts/data_transformation/test.csv
+          random_state: 57
+      schema/customerChurnSchema.yaml:
+        targer_colunm: Exited
+    outs:
+    - path: artifacts/data_transformation/preprocessor.pkl
+      hash: md5
+      md5: 2c3f6c0b3003d3ca82730470b3bbf4cb
+      size: 2776
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 670a8872b90ade5a56905489bcafd8a5
+      size: 12948098
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: 16d3f66123beba8d5a1435eec881f491
+      size: 30209218

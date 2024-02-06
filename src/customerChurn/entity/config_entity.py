@@ -20,13 +20,11 @@ class DataTransformationConfig:
     dataset_file_path: Path
     processed_dataset_file_path: Path
     preprocessor_obj_path: Path
-    dataset_summary_path: Path
     targer_colunm: str
-    train_size: float
-    stock_symbol: str
+    test_size: float
     train_dataset_file_path: Path
     test_dataset_file_path: Path
-    window_size: int
+    random_state: float
     
 @dataclass
 class DataTrainingConfig:

@@ -12,15 +12,13 @@ data_validation:
 
 data_transformation:
   root_dir: artifacts/data_transformation
-  dataset_file_path: artifacts/raw_data/dataset.csv
+  dataset_file_path: artifacts/data_ingestion/dataset.csv
   processed_dataset_file_path: artifacts/data_transformation/processed_dataset.csv
   preprocessor_obj_path: artifacts/data_transformation/preprocessor.pkl
-  dataset_summary_path: artifacts/data_transformation/dataset_summary.txt
-  train_size: 0.95
+  test_size: 0.3
   train_dataset_file_path: artifacts/data_transformation/train.csv
   test_dataset_file_path: artifacts/data_transformation/test.csv
-  stock_symbol: SBIN 
-  window_size: 60
+  random_state: 57
 
 model_trainer:
   root_dir: artifacts/model_trainer
