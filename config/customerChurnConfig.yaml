@@ -7,7 +7,7 @@ data_ingestion:
 
 data_validation:
   root_dir: artifacts/data_validation
-  dataset_file_path: artifacts/raw_data/dataset.csv
+  dataset_file_path: artifacts/data_ingestion/dataset.csv
   validation_status_file_path: artifacts/data_validation/status.txt
 
 data_transformation:

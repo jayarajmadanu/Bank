@@ -17,3 +17,42 @@ stages:
           root_dir: artifacts/data_ingestion
           local_data_file_path: artifacts/data_ingestion/dataset.csv
           source_url: rawData/train.csv
+  data_validation:
+    cmd: py -m src.customerChurn.pipeline.stage_02_data_validation_pipeline
+    deps:
+    - path: src/customerChurn/components/data_validation.py
+      hash: md5
+      md5: 3a69845d328e092b7da4c95d065a4e74
+      size: 1112
+    - path: src/customerChurn/pipeline/stage_02_data_validation_pipeline.py
+      hash: md5
+      md5: 489c1fa9d95686810a9688a78a548f96
+      size: 986
+    params:
+      config/customerChurnConfig.yaml:
+        data_validation:
+          root_dir: artifacts/data_validation
+          dataset_file_path: artifacts/data_ingestion/dataset.csv
+          validation_status_file_path: artifacts/data_validation/status.txt
+      schema/customerChurnSchema.yaml:
+        columns:
+          id: int6
+          CustomerId: int64
+          Surname: object
+          CreditScore: int64
+          Geography: object
+          Gender: object
+          Age: float64
+          Tenure: int64
+          Balance: float64
+          NumOfProducts: int64
+          HasCrCard: float64
+          IsActiveMember: float64
+          EstimatedSalary: float64
+          Exited: int64
+        targer_colunm: Exited
+    outs:
+    - path: artifacts/data_validation/status.txt
+      hash: md5
+      md5: f827cf462f62848df37c5e1e94a4da74
+      size: 4

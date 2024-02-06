@@ -7,3 +7,14 @@ stages:
     params:
       - config/customerChurnConfig.yaml:
         - data_ingestion
+  data_validation:
+    cmd: py -m src.customerChurn.pipeline.stage_02_data_validation_pipeline
+    deps:
+      - src/customerChurn/pipeline/stage_02_data_validation_pipeline.py
+      - src/customerChurn/components/data_validation.py
+    params:
+      - config/customerChurnConfig.yaml:
+        - data_validation
+      - schema/customerChurnSchema.yaml:
+    outs:
+      - artifacts/data_validation/status.txt
