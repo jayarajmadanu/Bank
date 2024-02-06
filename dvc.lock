@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: py -m src.customerChurn.pipeline.stage_01_data_ingestion_pipeline
+    deps:
+    - path: src/customerChurn/components/data_ingestion.py
+      hash: md5
+      md5: 4e3cecd68bdbdec7ab573ab22bee91f4
+      size: 963
+    - path: src/customerChurn/pipeline/stage_01_data_ingestion_pipeline.py
+      hash: md5
+      md5: a5fc4b7c1a3fafc05c4f2cbb7f572d7d
+      size: 758
+    params:
+      config/customerChurnConfig.yaml:
+        data_ingestion:
+          root_dir: artifacts/data_ingestion
+          local_data_file_path: artifacts/data_ingestion/dataset.csv
+          source_url: rawData/train.csv
