@@ -18,9 +18,9 @@ class ConfigurationManager:
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         config = self.config['data_ingestion']
         data_ingestion_config = DataIngestionConfig(
-            symbol= config['symbol'],
+            source_url= config['source_url'],
             local_data_file_path= config['local_data_file_path'],
-            start_year= config['start_year']
+            root_dir= config['root_dir']
         )
         return data_ingestion_config
     

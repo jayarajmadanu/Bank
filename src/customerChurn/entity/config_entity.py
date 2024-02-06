@@ -3,9 +3,9 @@ from pathlib import Path
 
 @dataclass
 class DataIngestionConfig:
-    symbol: Path
+    source_url: Path
     local_data_file_path: Path
-    start_year: int
+    root_dir: Path
     
 @dataclass
 class DataValidationConfig:

@@ -1,9 +1,9 @@
-artifacts_root: artifacts/customerChurn/raw_data/
+artifacts_root: artifacts
 
 data_ingestion:
-  symbol: SBIN 
-  local_data_file_path: artifacts/raw_data/dataset.csv
-  start_year: 2000
+  root_dir: artifacts/data_ingestion
+  local_data_file_path: artifacts/data_ingestion/dataset.csv
+  source_url: rawData/train.csv
 
 data_validation:
   root_dir: artifacts/data_validation
