@@ -30,8 +30,8 @@ class DataTrainer:
         models = {
             "Random Forest": RandomForestClassifier(),
             #"SVR":SVR(),
-            "XGBClassifier": XGBClassifier(),
-            "AdaBoost Classifier": AdaBoostClassifier(),
+            #"XGBClassifier": XGBClassifier(),
+            #"AdaBoost Classifier": AdaBoostClassifier(),
             #"Gradient Boosting": GradientBoostingClassifier(),
         }
         logger.info("TRAINING MODELS")

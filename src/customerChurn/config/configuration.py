@@ -69,7 +69,8 @@ class ConfigurationManager:
             root_dir=config['root_dir'],
             mlflow_uri=config['mlflow_uri'],
             model_path=config['model_path'],
-            test_data_path=config['test_data_path']
+            test_data_path=config['test_data_path'],
+            preprocessor_path=config['preprocessor_path']
         )
         return model_evaluation_config
         

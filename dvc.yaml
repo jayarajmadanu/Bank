@@ -44,5 +44,13 @@ stages:
       - params/customerChurnParams.yaml:
         - model_trainer
     outs:
-      - artifactsmodel_trainer/bestParams.txt
       - artifacts/model_trainer/model.pkl
+    
+  model_evaluation:
+    cmd: py -m src.customerChurn.pipeline.stage_05_data_evaluation_pipeline
+    deps:
+      - src/customerChurn/pipeline/stage_05_data_evaluation_pipeline.py
+      - src/customerChurn/components/model_evaluation.py
+    params:
+      - config/customerChurnConfig.yaml:
+        - model_evaluation

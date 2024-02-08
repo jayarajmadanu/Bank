@@ -98,8 +98,8 @@ stages:
     deps:
     - path: src/customerChurn/components/data_trainer.py
       hash: md5
-      md5: 4a53c7e3fbed5fcd77bd7ba6ec968a47
-      size: 4447
+      md5: 7c9a3d9447d15903ecc6121a563a70df
+      size: 4600
     - path: src/customerChurn/pipeline/stage_04_data_training_pipeline.py
       hash: md5
       md5: 16ad10786fcf737488ac1bc90e439c01
@@ -118,21 +118,13 @@ stages:
             Random Forest:
               max_features:
               - sqrt
-              - log2
               n_estimators:
-              - 64
-              - 128
               - 256
               max_depth:
-              - 3
-              - 5
-              - 7
-              - 9
+              - 13
               n_jobs:
               - -1
               class_weight:
-              - 0: 1
-                1: 2
               - 0: 1
                 1: 1
             SVR:
@@ -172,25 +164,37 @@ stages:
               - 6
             XGBClassifier:
               learning_rate:
-              - 0.01
-              - 0.05
-              - 0.001
+              - 0.1
               n_estimators:
-              - 32
-              - 64
               - 128
-              - 256
               max_depth:
-              - 3
-              - 5
               - 10
             AdaBoost Classifier:
               learning_rate:
-              - 0.1
-              - 0.01
-              - 0.5
-              - 0.001
+              - 0.9
               n_estimators:
-              - 64
               - 128
-              - 256
+    outs:
+    - path: artifacts/model_trainer/model.pkl
+      hash: md5
+      md5: 7754ff84ea2e68f95052f0df35071e93
+      size: 169562162
+  model_evaluation:
+    cmd: py -m src.customerChurn.pipeline.stage_05_data_evaluation_pipeline
+    deps:
+    - path: src/customerChurn/components/model_evaluation.py
+      hash: md5
+      md5: fa4828ca198302064f8053dc4cde92c8
+      size: 1645
+    - path: src/customerChurn/pipeline/stage_05_data_evaluation_pipeline.py
+      hash: md5
+      md5: 2842163b41ad9e07213d4aa09e626913
+      size: 782
+    params:
+      config/customerChurnConfig.yaml:
+        model_evaluation:
+          root_dir: artifacts/model_evaluation
+          mlflow_uri: https://dagshub.com/jayarajmadanu/Bank.mlflow
+          test_data_path: artifacts/data_transformation/test.csv
+          model_path: artifacts/model_trainer/model.pkl
+          preprocessor_path: artifacts/data_transformation/preprocessor.pkl

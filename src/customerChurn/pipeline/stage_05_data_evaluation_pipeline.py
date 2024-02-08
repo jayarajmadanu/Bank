@@ -1,4 +1,4 @@
-from customerChurn.config.configuration import ConfigurationManager
+from src.customerChurn.config.configuration import ConfigurationManager
 from src.customerChurn.entity.config_entity import ModelEvaluationConfig
 from src.customerChurn.components.model_evaluation import ModelEvaluation
 

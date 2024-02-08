@@ -41,6 +41,7 @@ class ModelEvaluationConfig:
     mlflow_uri: str
     test_data_path: Path
     model_path: Path
+    preprocessor_path: Path
     
 @dataclass
 class PredictionConfig:
