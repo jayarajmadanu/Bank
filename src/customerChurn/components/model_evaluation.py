@@ -31,6 +31,7 @@ class ModelEvaluation:
         y_test = test_df.iloc[:,13]
         
         with mlflow.start_run():
+            mlflow.sklearn.log_model(model, artifact_path="model")
             predicted_values = model.predict(X_test)
             (accuracy, precision, recall, f1) = self.eval_metrics(y_test, predicted_values)
             mlflow.log_metrics({
