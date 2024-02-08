@@ -61,12 +61,12 @@ stages:
     deps:
     - path: src/customerChurn/components/data_transformation.py
       hash: md5
-      md5: 3404e315b6a9d04235c92e6f9672b708
-      size: 3108
+      md5: 5d48b32b2b364e927a2e97f7e1401d80
+      size: 3502
     - path: src/customerChurn/pipeline/stage_03_data_transformation_pipeline.py
       hash: md5
-      md5: ba6a4f83f6653912f9f139b88659ce2c
-      size: 881
+      md5: 58ff6ae74a9baa2bf8267dd53500098f
+      size: 883
     params:
       config/customerChurnConfig.yaml:
         data_transformation:
@@ -83,7 +83,7 @@ stages:
     outs:
     - path: artifacts/data_transformation/preprocessor.pkl
       hash: md5
-      md5: 2c3f6c0b3003d3ca82730470b3bbf4cb
+      md5: 1c2de8232d7ae94bebc5d0a5f91bd625
       size: 2776
     - path: artifacts/data_transformation/test.csv
       hash: md5
@@ -91,5 +91,106 @@ stages:
       size: 12948098
     - path: artifacts/data_transformation/train.csv
       hash: md5
-      md5: 16d3f66123beba8d5a1435eec881f491
-      size: 30209218
+      md5: b8de08ab2a560bd8d1f87e1c211978c2
+      size: 42810623
+  data_training:
+    cmd: py -m src.customerChurn.pipeline.stage_04_data_training_pipeline
+    deps:
+    - path: src/customerChurn/components/data_trainer.py
+      hash: md5
+      md5: 4a53c7e3fbed5fcd77bd7ba6ec968a47
+      size: 4447
+    - path: src/customerChurn/pipeline/stage_04_data_training_pipeline.py
+      hash: md5
+      md5: 16ad10786fcf737488ac1bc90e439c01
+      size: 808
+    params:
+      config/customerChurnConfig.yaml:
+        model_trainer:
+          root_dir: artifacts/model_trainer
+          train_data_path: artifacts/data_transformation/train.csv
+          test_data_path: artifacts/data_transformation/test.csv
+          model_name: model.pkl
+          best_parsms: artifacts/model_trainer/bestParams.txt
+      params/customerChurnParams.yaml:
+        model_trainer:
+          params:
+            Random Forest:
+              max_features:
+              - sqrt
+              - log2
+              n_estimators:
+              - 64
+              - 128
+              - 256
+              max_depth:
+              - 3
+              - 5
+              - 7
+              - 9
+              n_jobs:
+              - -1
+              class_weight:
+              - 0: 1
+                1: 2
+              - 0: 1
+                1: 1
+            SVR:
+              kernel:
+              - linear
+              - poly
+              - rbf
+              C:
+              - 1
+              - 25
+              - 57
+              epsilon:
+              - 0.1
+              - 0.01
+              - 0.001
+            Gradient Boosting:
+              learning_rate:
+              - 0.1
+              - 0.01
+              - 0.05
+              - 0.001
+              subsample:
+              - 0.75
+              - 0.8
+              - 0.85
+              - 0.9
+              max_features:
+              - sqrt
+              - log2
+              n_estimators:
+              - 128
+              - 256
+              - 512
+              max_depth:
+              - 3
+              - 5
+              - 6
+            XGBClassifier:
+              learning_rate:
+              - 0.01
+              - 0.05
+              - 0.001
+              n_estimators:
+              - 32
+              - 64
+              - 128
+              - 256
+              max_depth:
+              - 3
+              - 5
+              - 10
+            AdaBoost Classifier:
+              learning_rate:
+              - 0.1
+              - 0.01
+              - 0.5
+              - 0.001
+              n_estimators:
+              - 64
+              - 128
+              - 256

@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 import numpy as np
+from imblearn.over_sampling import SMOTE
+from collections import Counter
 
 class DataTransformation:
     def __init__(self, config: DataTransformationConfig):
@@ -53,7 +55,13 @@ class DataTransformation:
         X_train_processed = preprocessor.fit_transform(X_train)
         X_test_processed = preprocessor.transform(X_test)
         
-        train_dataset = np.c_[X_train_processed, np.array(y_train)]
+        # Oversampling the training data
+        logger.info(f"Before Sample value count is {Counter(y_train)}")
+        smt = SMOTE(sampling_strategy=0.8)
+        X_train_sm, y_train_sm = smt.fit_resample(X_train_processed, y_train)
+        logger.info(f"After Sample value count is {Counter(y_train_sm)}")
+        
+        train_dataset = np.c_[X_train_sm, np.array(y_train_sm)]
         test_dataset = np.c_[X_test_processed, np.array(y_test)]
         
         train_dataset = pd.DataFrame(train_dataset)

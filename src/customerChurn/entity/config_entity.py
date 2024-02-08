@@ -31,9 +31,9 @@ class DataTrainingConfig:
     root_dir: Path
     train_data_path: Path
     test_data_path: Path
-    model_name: str
-    models: dict
     params: dict
+    model_name: str
+    best_parsms: Path
     
 @dataclass
 class ModelEvaluationConfig:

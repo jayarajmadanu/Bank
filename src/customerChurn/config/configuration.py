@@ -54,12 +54,12 @@ class ConfigurationManager:
         config = self.config['model_trainer']
         params = self.params['model_trainer']
         data_training_config = DataTrainingConfig(
-            model_name = config['model_name'],
-            models = '',
             params= params['params'],
             root_dir= config['root_dir'],
             test_data_path= config['test_data_path'],
-            train_data_path= config['train_data_path']            
+            train_data_path= config['train_data_path'],
+            model_name=config['model_name'],
+            best_parsms= config['best_parsms']    
         )
         return data_training_config
     

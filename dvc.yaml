@@ -32,3 +32,17 @@ stages:
       - artifacts/data_transformation/preprocessor.pkl
       - artifacts/data_transformation/test.csv
       - artifacts/data_transformation/train.csv
+  
+  data_training:
+    cmd: py -m src.customerChurn.pipeline.stage_04_data_training_pipeline
+    deps: 
+      - src/customerChurn/pipeline/stage_04_data_training_pipeline.py
+      - src/customerChurn/components/data_trainer.py
+    params:
+      - config/customerChurnConfig.yaml:
+        - model_trainer
+      - params/customerChurnParams.yaml:
+        - model_trainer
+    outs:
+      - artifactsmodel_trainer/bestParams.txt
+      - artifacts/model_trainer/model.pkl
