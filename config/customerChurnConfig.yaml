@@ -36,5 +36,5 @@ model_evaluation:
 
 prediction_config:
   model_path: artifacts/model_trainer/model.pkl
-  preprocessor_path: artifacts/data_transformation/proprocessor.pkl
+  preprocessor_path: artifacts/data_transformation/preprocessor.pkl
 
